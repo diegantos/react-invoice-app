@@ -12,45 +12,51 @@ export const InvoiceApp = () => {
 
     return (
       <>
-        <h2>Factura</h2>
-        <ul>
-          <li>Id: { id }</li>
-          <li>Id: { name }</li>
-        </ul>
+        <div className="container">
+          <h2>Factura</h2>
+          <ul className="list-group">
+            <li className="list-group-item">Id: {id}</li>
+            <li className="list-group-item">Id: {name}</li>
+          </ul>
 
-        <h3>Datos del cliente</h3>
-        <ul>
-          <li>{ nameClient } { lastName }</li>
-          <li>{ country }</li>
-          <li>{ city }</li>
-          <li>{ street } { number }</li>
-        </ul>
+          <h3>Datos del cliente</h3>
+          <ul className="list-group">
+            <li className="list-group-item">
+              {nameClient} {lastName}
+            </li>
+            <li className="list-group-item">{country}</li>
+            <li className="list-group-item">{city}</li>
+            <li className="list-group-item">
+              {street} {number}
+            </li>
+          </ul>
 
-        <h3>Datos de la empresa</h3>
-        <ul>
-            <li>{ companyName }</li>
-            <li>{ fiscalNumber }</li>
-        </ul>
+          <h3>Datos de la empresa</h3>
+          <ul className="list-group">
+            <li className="list-group-item">{companyName}</li>
+            <li className="list-group-item">{fiscalNumber}</li>
+          </ul>
 
-        <h3>Productos de la factura</h3>
-        <table>
+          <h3>Productos de la factura</h3>
+          <table className="table table-striped table-hover">
             <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                </tr>
+              <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+              </tr>
             </thead>
             <tbody>
-                { items.map(({ id, product, price, quantity })=>(
-                    <tr key={ id }>
-                        <td>{ product }</td>
-                        <td>{ price }</td>
-                        <td>{ quantity }</td>
-                    </tr>
-                ))}
+              {items.map(({ id, product, price, quantity }) => (
+                <tr key={id}>
+                  <td>{product}</td>
+                  <td>{price}</td>
+                  <td>{quantity}</td>
+                </tr>
+              ))}
             </tbody>
-        </table>
+          </table>
+        </div>
       </>
     );
 }
