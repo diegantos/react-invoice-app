@@ -7,19 +7,58 @@ import { getInvoice } from '../Services/getInvoice'
 import { Totalview } from '../TotalView/TotalView'
 import './InvoiceApp'
 
+const invoiceInitial = {
+  id: 10,
+  name: "Componentes Pc",
+  client: {
+    name: "Pepe",
+    lastName: "Doe",
+    address: {
+      country: "Spain",
+      city: "Madrid",
+      street: "Calle Uno",
+      number: 12,
+    },
+  },
+  company: {
+    name: "Mi propia compañia",
+    fiscalNumber: 123456,
+  },
+  items: [
+    {
+      id: 1,
+      product: "Cpu Intel I7",
+      price: 499,
+      quantity: 1,
+    },
+    {
+      id: 2,
+      product: "Corsair Keyboard Mecanico",
+      price: 150,
+      quantity: 2,
+    },
+    {
+      id: 3,
+      product: "Monitor Asus",
+      price: 350,
+      quantity: 1,
+    },
+  ],
+};
+
 export const InvoiceApp = () => {
 
-    const [ invoice, setInvoice ] = useState({})
+    const [ invoice, setInvoice ] = useState(invoiceInitial)
 
-    const [items, setItems] = useState(itemsInitial);
+    const [items, setItems] = useState([]);
 
     useEffect(() => {
       const data = getInvoice()
       setInvoice(data)
       setItems(data.items)
-    })
+    }, [])
 
-    const invoice = getInvoice()
+    // const invoice = getInvoice()
     const { total, id, name, client, company, items: itemsInitial } = invoice;
 
     // const [ invoiceItemsState, setInvoiceItemsState ] = useState({
