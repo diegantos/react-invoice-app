@@ -20,6 +20,32 @@ export const InvoiceApp = () => {
 
     const [ counter, setCounter ] = useState(4)
 
+    const onInvoiceItemSubmit = (event) => {
+      event.preventDefault();
+
+      if (productValue.trim().length <= 1) return;
+      if (priceValue.trim().length <= 1) return;
+      if (isNaN(priceValue.trim()))
+        return alert("El precio debe ser un valor numérico");
+      if (quantityValue.trim().length < 1) return;
+      if (isNaN(quantityValue.trim()))
+        return alert("La cantidad debe ser un valor numérico mayor de 0");
+
+      setItems([
+        ...items,
+        {
+          id: { counter },
+          product: productValue.trim(),
+          price: +priceValue.trim(), //dos formas de convertir a Int
+          quantity: parseInt(quantityValue.trim(), 10),
+        },
+      ]);
+      setProductValue("");
+      setPriceValue("");
+      setQuantityValue("");
+      setCounter(counter + 1);
+    }
+
     return (
       <>
         <div className="container">
@@ -41,18 +67,7 @@ export const InvoiceApp = () => {
               <ListItemsView title="Productos de la factura" items={items} />
               <Totalview total={total} />
 
-              <form className='w-50' onSubmit={ event => { 
-                event.preventDefault() 
-                setItems([...items, { 
-                  id: { counter },
-                  product: productValue, 
-                  price: +priceValue, //dos formas de convertir a Int
-                  quantity: parseInt(quantityValue, 10) }])
-                  setProductValue('')
-                  setPriceValue('')
-                  setQuantityValue('')
-                  setCounter( counter + 1 )
-                }}>
+              <form className='w-50' onSubmit={ onInvoiceItemSubmit }>
                 <input
                   type="text"
                   name="product"
