@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ClientView } from '../ClientView/ClientView'
 import { CompanyView } from '../CompanyView/CompanyView'
 import { InvoiceView } from '../InvoiceView/InvoiceView'
@@ -9,14 +9,30 @@ import './InvoiceApp'
 
 export const InvoiceApp = () => {
 
+    const [ invoice, setInvoice ] = useState({})
+
+    const [items, setItems] = useState(itemsInitial);
+
+    useEffect(() => {
+      const data = getInvoice()
+      setInvoice(data)
+      setItems(data.items)
+    })
+
     const invoice = getInvoice()
     const { total, id, name, client, company, items: itemsInitial } = invoice;
+
+    // const [ invoiceItemsState, setInvoiceItemsState ] = useState({
+    //   productValue: '',
+    //   priceValue: '',
+    //   quantityValue: '',
+    // })
+
+    // const { productValue, priceValue, quantityValue } = invoiceItemsState
 
     const [ productValue, setProductValue ] = useState('')
     const [ priceValue, setPriceValue ] = useState('')
     const [ quantityValue, setQuantityValue ] = useState('')
-
-    const [ items, setItems ] = useState(itemsInitial)
 
     const [ counter, setCounter ] = useState(4)
 
