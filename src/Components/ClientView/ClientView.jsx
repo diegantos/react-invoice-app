@@ -7,10 +7,10 @@ export const ClientView = ({title, client}) => {
 
     return (
       <>
-        <h3>{ title }</h3>
+        <h3>{title}</h3>
         <ul className="list-group">
-          <li className="list-group-item active">
-            { name } { lastName }
+          <li className="list-group-item list-group-item-light active">
+            {name} {lastName}
           </li>
           <li className="list-group-item">
             {city}, {country}
