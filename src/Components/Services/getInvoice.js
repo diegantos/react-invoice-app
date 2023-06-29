@@ -7,10 +7,13 @@ export const getInvoice = () => {
     //     total = total + price * quantity
     // })
 
-    const total = Invoice.items
-        .map( item => item.price * item.quantity )
-        .reduce( ( acc, currentValue ) => acc + currentValue, 0)
-
+    const total = calculateTotal(Invoice.items)
 
     return {...Invoice, total}
+}
+
+export const calculateTotal = (items = []) => {
+    return items
+        .map( item => item.price * item.quantity )
+        .reduce( ( acc, currentValue ) => acc + currentValue, 0)
 }

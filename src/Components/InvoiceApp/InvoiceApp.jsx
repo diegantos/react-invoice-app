@@ -3,7 +3,7 @@ import { ClientView } from '../ClientView/ClientView'
 import { CompanyView } from '../CompanyView/CompanyView'
 import { InvoiceView } from '../InvoiceView/InvoiceView'
 import { ListItemsView } from '../ListItemsView/ListItemsView'
-import { getInvoice } from '../Services/getInvoice'
+import { getInvoice, calculateTotal } from '../Services/getInvoice'
 import { Totalview } from '../TotalView/TotalView'
 import './InvoiceApp'
 
@@ -52,14 +52,34 @@ export const InvoiceApp = () => {
 
     const [items, setItems] = useState([]);
 
+    const [productValue, setProductValue] = useState("");
+    const [priceValue, setPriceValue] = useState("");
+    const [quantityValue, setQuantityValue] = useState("");
+
+    const [total, setTotal] = useState(0)
+    const [counter, setCounter] = useState(4);
+
     useEffect(() => {
       const data = getInvoice()
       setInvoice(data)
       setItems(data.items)
     }, [])
 
+    useEffect(() => {
+      console.log('Price, product o quantity has changed')
+    },[priceValue, productValue, quantityValue])
+
+    useEffect(() => {
+      console.log('Counter has changed')
+    },[counter])
+
+    useEffect(() => {
+      console.log('Items has changed')
+      setTotal(calculateTotal(items))
+    },[items])
+
     // const invoice = getInvoice()
-    const { total, id, name, client, company, items: itemsInitial } = invoice;
+    const { id, name, client, company } = invoice;
 
     // const [ invoiceItemsState, setInvoiceItemsState ] = useState({
     //   productValue: '',
@@ -68,12 +88,6 @@ export const InvoiceApp = () => {
     // })
 
     // const { productValue, priceValue, quantityValue } = invoiceItemsState
-
-    const [ productValue, setProductValue ] = useState('')
-    const [ priceValue, setPriceValue ] = useState('')
-    const [ quantityValue, setQuantityValue ] = useState('')
-
-    const [ counter, setCounter ] = useState(4)
 
     const onInvoiceItemSubmit = (event) => {
       event.preventDefault();
@@ -105,7 +119,9 @@ export const InvoiceApp = () => {
       <>
         <div className="container">
           <div className="card my-5">
-            <div className="card-header">Factura</div>
+            <div className="card-header">
+              <h2>Factura</h2>
+            </div>
             <div className="card-body">
               <InvoiceView id={id} name={name} />
 
@@ -122,15 +138,15 @@ export const InvoiceApp = () => {
               <ListItemsView title="Productos de la factura" items={items} />
               <Totalview total={total} />
 
-              <form className='w-50' onSubmit={ onInvoiceItemSubmit }>
+              <form className="w-50" onSubmit={onInvoiceItemSubmit}>
                 <input
                   type="text"
                   name="product"
                   placeholder="Producto"
                   className="form-control mt-3 mb-3"
-                  value={ productValue }
+                  value={productValue}
                   onChange={(event) => {
-                    setProductValue(event.target.value)
+                    setProductValue(event.target.value);
                   }}
                 />
                 <input
@@ -138,9 +154,9 @@ export const InvoiceApp = () => {
                   name="price"
                   placeholder="Precio"
                   className="form-control mb-3"
-                  value={ priceValue }
+                  value={priceValue}
                   onChange={(event) => {
-                    setPriceValue(event.target.value)
+                    setPriceValue(event.target.value);
                   }}
                 />
                 <input
@@ -148,12 +164,14 @@ export const InvoiceApp = () => {
                   name="quantity"
                   placeholder="Cantidad"
                   className="form-control mb-3"
-                  value={ quantityValue }
+                  value={quantityValue}
                   onChange={(event) => {
-                    setQuantityValue(event.target.value)
+                    setQuantityValue(event.target.value);
                   }}
                 />
-                <button type="submit" className='btn btn-primary'>Añadir producto</button>
+                <button type="submit" className="btn btn-primary">
+                  Añadir producto
+                </button>
               </form>
             </div>
           </div>
