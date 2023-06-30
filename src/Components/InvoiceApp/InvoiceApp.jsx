@@ -93,13 +93,9 @@ export const InvoiceApp = () => {
               <Totalview total={total} />
 
               <button className="btn btn-secondary" onClick={onActiveForm}>
-                {!activeForm ? "Agregar nuevo producto" : 'Ocultar formulario'}
+                {!activeForm ? "Agregar nuevo producto" : 'Ocultar agregar producto'}
               </button>
-              {!activeForm ? (
-                ""
-              ) : (
-                <FormItems handle={(newItem) => handleAddItems(newItem)} />
-              )}
+              {activeForm && <FormItems handle={(newItem) => handleAddItems(newItem)} />}
             </div>
           </div>
         </div>
