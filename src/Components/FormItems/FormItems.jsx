@@ -34,7 +34,7 @@ export const FormItems = ({handle}) => {
     setFormItemsState({
         product:'',
         price:'',
-        value:'',
+        quantity:'',
     })
   };
 
