@@ -1,7 +1,7 @@
 import './ListItemsView'
 import PropTypes from "prop-types";
 
-export const ListItemsView = ({title, items}) => {
+export const ListItemsView = ({title, items, handleDeleteItem }) => {
     return (
       <>
         <h3>{ title }</h3>
@@ -11,6 +11,7 @@ export const ListItemsView = ({title, items}) => {
               <th>Producto</th>
               <th>Precio</th>
               <th>Cantidad</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -19,6 +20,11 @@ export const ListItemsView = ({title, items}) => {
                 <td>{product}</td>
                 <td>{price}</td>
                 <td>{quantity}</td>
+                <td>
+                  <button 
+                    onClick={ () => handleDeleteItem(id) }
+                    className='btn btn-danger'>Eliminar</button>
+                </td>
               </tr>
             ))}
           </tbody>
