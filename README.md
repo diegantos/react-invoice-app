@@ -7,7 +7,7 @@ https://github.com/diegantos/react-invoice-app/assets/118907489/7ad69a6a-a35a-49
 
 ## Descripción 📑
 
-Ejemplo de página de facturas para agregar y eliminar items
+Ejemplo de página de facturas para agregar y eliminar productos dando estilo con Boostrap
 
 ## Tecnologías 🛠
 <!-- Iconos sacados de: https://github.com/hendrasob/badges/blob/master/README.md y https://github.com/alexandresanlim/Badges4-README.md-Profile -->
